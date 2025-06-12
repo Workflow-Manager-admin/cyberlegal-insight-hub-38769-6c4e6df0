@@ -2,18 +2,19 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import WelcomePage from "./WelcomePage";
+import CyberQuiz from "./CyberQuiz";
+import { useNavigate } from "react-router-dom";
 
 // Step: Cyber Quiz
 function Quiz() {
+  // Use router navigation to proceed to upload step on quiz completion
+  const navigate = useNavigate();
   return (
-    <section className="container hero" style={{textAlign: 'center'}}>
-      <div className="subtitle">Step 1: Digital Behavior Check</div>
-      <h1 className="title">Cyber Hygiene Quiz</h1>
-      <div className="description">
-        {/* TODO: Quiz Implementation */}
-        [Quiz component coming soon...]
-      </div>
-    </section>
+    <CyberQuiz
+      onComplete={() => {
+        navigate("/upload");
+      }}
+    />
   );
 }
 
