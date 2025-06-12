@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import WelcomePage from "./WelcomePage";
 import CyberQuiz from "./CyberQuiz";
-import { useNavigate } from "react-router-dom";
+import ContractUpload from "./ContractUpload";
+import { useNavigate, useNavigate as useNavUpload } from "react-router-dom";
 
 // Step: Cyber Quiz
 function Quiz() {
@@ -18,9 +19,7 @@ function Quiz() {
   );
 }
 
-import ContractUpload from "./ContractUpload";
 // Step: Contract Upload/Paste
-import { useNavigate as useNavUpload } from "react-router-dom";
 function Upload() {
   const navigate = useNavUpload();
   // Handlers: contract submission or skip

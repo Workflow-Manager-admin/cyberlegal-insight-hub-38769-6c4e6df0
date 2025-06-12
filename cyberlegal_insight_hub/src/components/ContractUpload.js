@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { calculateContractRiskScore, simulateRiskModals } from "../logic/riskScoring";
 
 /**
  * ContractUpload component handles upload/paste of contract text.
@@ -42,7 +43,11 @@ function ContractUpload({ onContinue, onSkip }) {
       setError("Please paste or upload your contract text, or use 'Skip' below.");
       return;
     }
-    if (onContinue) onContinue(contractText.trim());
+    // Score contract for demo; display stub risk simulation modal (no-op currently)
+    const riskResult = calculateContractRiskScore(contractText.trim());
+    // In a future release, show simulation popup if high-risk issues detected
+    // e.g., if (riskResult.level === "high") showSimulateRiskModal(simulateRiskModals.contractRedFlag);
+    if (onContinue) onContinue(contractText.trim(), riskResult); // Pass risk result up for main flow
   };
 
   // Skip contract upload (cyber risk only)

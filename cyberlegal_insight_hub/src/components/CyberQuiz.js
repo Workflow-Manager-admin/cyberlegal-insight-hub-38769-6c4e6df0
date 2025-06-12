@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { calculateCyberHygieneScore, simulateRiskModals } from "../logic/riskScoring";
 
 /**
  * Simple set of cyber hygiene quiz questions and options.
@@ -148,6 +149,9 @@ function ProgressBar({ current, total }) {
 /**
  * Main CyberQuiz component with question navigation, state, and finish handler.
  */
+/**
+ * Accepts prop 'onComplete', which receives ({ answers, scoreResult }) when finished.
+ */
 // PUBLIC_INTERFACE
 function CyberQuiz({ onComplete }) {
   const [step, setStep] = useState(0); // index of current question
@@ -161,7 +165,10 @@ function CyberQuiz({ onComplete }) {
     if (step < QUIZ_DATA.length - 1) {
       setStep(step + 1);
     } else if (onComplete) {
-      onComplete(newAnswers);
+      // Calculate score before completing
+      const scoreResult = calculateCyberHygieneScore(newAnswers);
+      onComplete({ answers: newAnswers, scoreResult });
+      // -- In future, could trigger simulateRiskModals.phishingWarning here if demoing modals.
     }
   }
 
