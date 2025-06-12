@@ -1,52 +1,106 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
+import React, { useState } from "react";
 import WelcomePage from "./WelcomePage";
 import CyberQuiz from "./CyberQuiz";
 import ContractUpload from "./ContractUpload";
+import ResultsDashboard from "./ResultsDashboard";
+import { calculateCyberHygieneScore, calculateContractRiskScore, calculateOverallRisk } from "../logic/riskScoring";
 import { useNavigate, useNavigate as useNavUpload } from "react-router-dom";
 
-// Step: Cyber Quiz
-function Quiz() {
-  // Use router navigation to proceed to upload step on quiz completion
-  const navigate = useNavigate();
-  return (
-    <CyberQuiz
-      onComplete={() => {
-        navigate("/upload");
-      }}
-    />
-  );
-}
+// Unifies quiz + contract upload + results in-memory (non-persistence)
+// Main router handles forward/pass-data between steps via in-memory hooks
 
-// Step: Contract Upload/Paste
-function Upload() {
-  const navigate = useNavUpload();
-  // Handlers: contract submission or skip
-  return (
-    <ContractUpload
-      onContinue={() => {
-        // Proceed to results step (you could pass contract text if needed)
-        navigate("/results");
-      }}
-      onSkip={() => {
-        // Proceed to results with no contract (cyber risk only)
-        navigate("/results");
-      }}
-    />
-  );
-}
+// Unified Flow Controller
+function UnifiedFlowRouter() {
+  // Step state: 0=quiz, 1=upload, 2=results, 3=thankyou
+  const [step, setStep] = useState(0);
+  const [quizAnswers, setQuizAnswers] = useState([]);
+  const [cyberScoreResult, setCyberScoreResult] = useState(null);
+  const [contractText, setContractText] = useState("");
+  const [contractScoreResult, setContractScoreResult] = useState(null);
+  const [overall, setOverall] = useState(null);
 
-// Step: Results Dashboard
-function Results() {
+  // Step 1: Cyber Quiz page
+  if (step === 0) {
+    return (
+      <CyberQuiz
+        onComplete={({ answers, scoreResult }) => {
+          setQuizAnswers(answers);
+          setCyberScoreResult(scoreResult);
+          setStep(1);
+        }}
+      />
+    );
+  }
+
+  // Step 2: Contract Upload page
+  if (step === 1) {
+    return (
+      <ContractUpload
+        onContinue={(contract, riskResult) => {
+          setContractText(contract);
+          setContractScoreResult(riskResult);
+          // combine for dashboard
+          const overallResult = calculateOverallRisk({
+            cyberScore: cyberScoreResult?.score,
+            contractScore: riskResult?.score,
+          });
+          setOverall(overallResult);
+          setStep(2);
+        }}
+        onSkip={() => {
+          setContractText("");
+          setContractScoreResult({ score: null, level: "unknown", issues: [] });
+          const overallResult = calculateOverallRisk({
+            cyberScore: cyberScoreResult?.score,
+            contractScore: null,
+          });
+          setOverall(overallResult);
+          setStep(2);
+        }}
+      />
+    );
+  }
+
+  // Step 3: Results Dashboard
+  if (step === 2) {
+    return (
+      <ResultsDashboard
+        cyberScoreResult={cyberScoreResult}
+        contractScoreResult={contractScoreResult}
+        overall={overall}
+        contractText={contractText}
+      />
+    );
+  }
+
+  // Step 4: Thank You
+  if (step === 3) {
+    return (
+      <section className="container hero" style={{ textAlign: "center" }}>
+        <div className="subtitle">Thank You</div>
+        <h1 className="title">Assessment Complete!</h1>
+        <div className="description">
+          We appreciate your time. Stay tuned for your personalized insights!
+        </div>
+        <button
+          className="btn btn-large"
+          onClick={() => setStep(0)}
+          style={{ marginTop: 26, minWidth: 120 }}
+        >
+          Retake Assessment
+        </button>
+      </section>
+    );
+  }
+
+  // Fallback for error step state
   return (
-    <section className="container hero" style={{textAlign: 'center'}}>
-      <div className="subtitle">Step 3: Your Risk Report</div>
-      <h1 className="title">Assessment Results</h1>
-      <div className="description">
-        {/* TODO: Results Dashboard */}
-        [Unified risk dashboard coming soon...]
-      </div>
+    <section className="container hero" style={{ textAlign: "center" }}>
+      <div className="subtitle">Error</div>
+      <h1 className="title">Something went wrong</h1>
     </section>
   );
 }
@@ -71,15 +125,14 @@ function ThankYou() {
  */
 // PUBLIC_INTERFACE
 function AppRouter() {
+  // Only home page ("/") is hard-routed; all other flow handled in-memory via UnifiedFlowRouter.
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<WelcomePage />} />
-        <Route path="/quiz" element={<Quiz />} />
-        <Route path="/upload" element={<Upload />} />
-        <Route path="/results" element={<Results />} />
-        <Route path="/thankyou" element={<ThankYou />} />
-        {/* Redirect unknown paths to home */}
+        {/* All assessment flow (quiz -> upload -> results -> thank you/retake) is handled inside UnifiedFlowRouter */}
+        <Route path="/quiz" element={<UnifiedFlowRouter />} />
+        {/* Redirect all unknown/legacy routes to home */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
