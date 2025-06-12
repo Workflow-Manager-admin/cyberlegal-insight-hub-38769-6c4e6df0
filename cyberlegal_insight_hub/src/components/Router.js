@@ -18,17 +18,23 @@ function Quiz() {
   );
 }
 
+import ContractUpload from "./ContractUpload";
 // Step: Contract Upload/Paste
+import { useNavigate as useNavUpload } from "react-router-dom";
 function Upload() {
+  const navigate = useNavUpload();
+  // Handlers: contract submission or skip
   return (
-    <section className="container hero" style={{textAlign: 'center'}}>
-      <div className="subtitle">Step 2: Analyze Your Legal Documents</div>
-      <h1 className="title">Upload or Paste a Contract</h1>
-      <div className="description">
-        {/* TODO: Upload/Paste component */}
-        [Contract analysis component coming soon...]
-      </div>
-    </section>
+    <ContractUpload
+      onContinue={() => {
+        // Proceed to results step (you could pass contract text if needed)
+        navigate("/results");
+      }}
+      onSkip={() => {
+        // Proceed to results with no contract (cyber risk only)
+        navigate("/results");
+      }}
+    />
   );
 }
 
