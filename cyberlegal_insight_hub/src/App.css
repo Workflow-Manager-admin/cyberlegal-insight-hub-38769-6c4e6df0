@@ -1,142 +1,121 @@
 :root {
-  /* Cyberpunk palette */
-  --neon-magenta: #FF4DD2;    /* Highlights/Titles */
-  --electric-blue: #00F0FF;   /* Button glows/Outlines/Buttons */
-  --midnight-purple: #1E123D; /* Main background */
-  --cyber-teal: #0FFFD6;      /* HUD glows/Borders */
-  --soft-indigo: #6A5ACD;     /* Transition/ambient tones */
-  --chrome-silver: #C5C5C5;   /* Metallic/armor elements */
-  --shadow-black: #0A0A0A;    /* Deepest contrast */
-  --hologram-pink: #FF80BF;   /* UI overlay accents */
+  /* Deep Graphite Harmonious Modern Palette */
+  --deep-graphite: #1E1E26;
+  --slate-grey: #3B3C48;
+  --neon-violet: #9B59FF;
+  --electric-magenta: #FF007A;
+  --matte-silver: #C4C5CA;
+  --muted-lilac: #A19BBD;
+  --blush-pink: #FFB4DA;
+  --night-purple: #2C1E3F;
 
-  /* Core usage mapping */
-  --color-primary: var(--electric-blue);      /* Buttons, glows, primary actions */
-  --color-accent: var(--neon-magenta);        /* Highlight, titles */
-  --color-surface-accent: var(--soft-indigo); /* Soft backgrounds, surfaces */
-  --color-ui-accent: var(--hologram-pink);    /* Overlay, accent borders */
-  --color-hud: var(--cyber-teal);             /* Border HUD glow */
-  --color-metal: var(--chrome-silver);        /* Metallic icons etc */
-  --color-contrast: var(--shadow-black);      /* Deepest elements, fonts */
-  --color-bg-gradient: linear-gradient(135deg, var(--midnight-purple) 70%, var(--soft-indigo) 100%);
+  /* Core mapping - for use in app elements */
+  --color-primary: var(--neon-violet);
+  --color-accent: var(--electric-magenta);
+  --color-surface: var(--slate-grey);
+  --color-surface-accent: var(--muted-lilac);
+  --color-overlay: var(--blush-pink);
+  --color-heading: var(--neon-violet);
+  --color-heading-contrast: var(--electric-magenta);
+  --color-bg-main: var(--deep-graphite);
+  --color-bg-gradient: linear-gradient(135deg, var(--deep-graphite) 60%, var(--night-purple) 100%);
+  --color-contrast: var(--night-purple);
+  --text-primary: var(--matte-silver);
+  --text-secondary: var(--muted-lilac);
+  --text-overlay: var(--night-purple); /* for high-accent overlays */
+  --border-light: var(--matte-silver);
+  --border-accent: var(--electric-magenta);
+  --shadow-main: 0 2px 32px 0 rgba(155,89,255,0.12), 0 1.5px 11px 0 rgba(255,0,122,0.08);
+  --shadow-card: 0 2px 15px 0 rgba(155,89,255,0.09), 0 1.5px 10px 0 rgba(44,30,63,0.13);
 
-  /* Base theme colors */
-  --background: var(--midnight-purple);
-  --surface: rgba(26, 18, 61, 0.92); /* translucent deep bg */
-  --surface-strong: #2a1752;
-  --navbar-bg: rgba(30,18,61,0.96);
-  --navbar-border: var(--cyber-teal);
-  --primary-text: var(--chrome-silver);
-  --title-text: var(--neon-magenta);
-  --secondary-text: #AAAEE5;
-  --disabled-text: #544661;
+  /* Gradient overlays and modals */
+  --overlay-gradient: linear-gradient(122deg, var(--blush-pink) 5%, var(--matte-silver) 65%, var(--muted-lilac) 100%);
+  --modal-bg: linear-gradient(110deg, var(--matte-silver), var(--blush-pink) 70%);
+  --focus-outline: 2px solid var(--electric-magenta);
 
-  /* Typography, radii, and spacing */
-  --font-size-base: 1.07rem;
+  /* UI mapping for buttons, cards, tabs */
+  --btn-bg: var(--neon-violet);
+  --btn-bg-hover: var(--electric-magenta);
+  --btn-text: #fff;
+  --btn-radius: 18px;
+  --btn-padding: 12px 28px;
+  --btn-shadow: 0 0 16px 3px rgba(155,89,255,0.25), 0 1.5px 8px 0 rgba(255,0,122,0.07);
+
+  --card-bg: linear-gradient(112deg, rgba(59,60,72,0.98) 90%, rgba(161,155,189,0.045) 100%);
+  --card-border: 1.5px solid var(--muted-lilac);
+
+  --tab-bg: var(--deep-graphite);
+  --tab-bg-active: var(--neon-violet);
+  --tab-text: var(--text-secondary);
+  --tab-text-active: #fff;
+  --tab-outline: 1.2px solid var(--matte-silver);
+
+  /* Miscellaneous */
+  --radius: 13px;
+  --font-family: 'Inter', 'Roboto', 'Orbitron', 'Share Tech Mono', 'Helvetica', 'Arial', sans-serif;
+  --font-size-base: 1.06rem;
   --font-size-lg: 1.22rem;
-  --font-size-xl: 1.85rem;
-  --font-size-title: 2.4rem;
-  --font-family: 'Orbitron', 'Share Tech Mono', 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  --font-size-xl: 1.8rem;
+  --font-size-title: 2.23rem;
   --line-height: 1.55;
-  --font-weight-title: 700;
+  --font-weight-title: 800;
 
   /* Spacing scale */
   --space-xs: 8px;
   --space-sm: 16px;
-  --space-md: 24px;
-  --space-lg: 40px;
-  --space-xl: 64px;
-  --radius: 10px;
-
-  /* Button */
-  --btn-bg: var(--electric-blue);
-  --btn-bg-hover: var(--cyber-teal);
-  --btn-text: var(--shadow-black);
-  --btn-radius: 16px;
-  --btn-padding: 10px 26px;
-
-  /* Card/Surface shadow */
-  --shadow-md: 0 2px 34px 2px rgba(0,240,255,0.15), 0 1.5px 9px 0 rgba(255, 77, 210, 0.075);
+  --space-md: 22px;
+  --space-lg: 38px;
+  --space-xl: 62px;
 }
 
-/* Cyberpunk base theme */
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--color-bg-gradient), var(--midnight-purple);
+  background: var(--color-bg-gradient), var(--color-bg-main);
   background-attachment: fixed;
   background-size: cover;
-  color: var(--primary-text);
+  color: var(--text-primary);
   font-family: var(--font-family);
   font-size: var(--font-size-base);
   line-height: var(--line-height);
+  letter-spacing: 0.007em;
+  position: relative;
+  background-color: var(--color-bg-main);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: 0.005em;
-  /* Add subtle scanline overlay */
-  position: relative;
-  /* fallback solid bg in case gradient isn't supported */
-  background-color: var(--midnight-purple);
+  transition: background 0.4s;
 }
 
-/* Layout wrapper */
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--color-bg-gradient), var(--midnight-purple);
+  background: var(--color-bg-gradient), var(--color-bg-main);
   background-size: cover;
   background-attachment: fixed;
-  box-shadow: 0 0 0 12px rgba(0,240,255,0.02) inset;
+  box-shadow: 0 0 0 20px rgba(44,30,63,0.045) inset;
   position: relative;
+  transition: box-shadow 0.24s;
+  z-index: 0;
 }
 
-/* Navigation bar */
-.navbar {
-  background: var(--navbar-bg);
-  border-bottom: 2.5px solid var(--navbar-border);
-  box-shadow: 0 4px 32px 0 var(--electric-blue), 0 2px 14px 0 var(--neon-magenta);
-  padding: var(--space-sm) 0;
-  position: fixed;
-  width: 100%;
-  z-index: 100;
-  box-sizing: border-box;
-  top: 0;
-  left: 0;
-  transition: background 0.17s;
-  display: flex;
-  font-family: 'Orbitron', var(--font-family);
-}
-
-.logo {
-  font-size: var(--font-size-lg);
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  letter-spacing: 0.03em;
-  color: var(--neon-magenta);
-  text-shadow: 0 0 10px var(--electric-blue), 0 0 1.1px var(--neon-magenta);
-  font-family: 'Orbitron', var(--font-family);
-  text-transform: uppercase;
-  filter: drop-shadow(0 0 4px var(--electric-blue));
-}
-
-.logo-symbol {
-  color: var(--electric-blue);
-  font-size: 1.6em;
-  font-weight: 900;
-  text-shadow: 0 0 10px var(--cyber-teal), 0 0 7px var(--electric-blue);
-  filter: brightness(1.5);
-}
-
-/* Layout constraint */
 .container {
-  max-width: 900px;
+  max-width: 980px;
   margin: 0 auto;
-  padding: 0 var(--space-md);
   width: 100%;
+  padding: 0 var(--space-md);
   box-sizing: border-box;
   background: transparent;
+  z-index: 1;
+}
+
+.card,
+.hero,
+.surface {
+  background: var(--card-bg);
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius);
 }
 
 /* Hero Section */
@@ -148,19 +127,59 @@ body {
   flex-direction: column;
   align-items: center;
   gap: var(--space-md);
-  background: linear-gradient(120deg, rgba(26,18,61,0.85) 81%, rgba(255,128,191,0.03) 100%);
-  box-shadow: 0 0 0 12px rgba(0,240,255,0.07) inset, 0 1px 16px 0 var(--cyber-teal);
-  border-radius: 13px;
+  background: linear-gradient(123deg, rgba(59,60,72,0.92) 88%, rgba(255,180,218,0.03) 100%);
+  box-shadow: 0 0 0 18px rgba(255,0,122,0.04) inset, 0 1px 20px 0 var(--neon-violet);
+  border-radius: var(--radius);
+}
+
+/* Navigation bar */
+.navbar {
+  background: linear-gradient(90deg, var(--color-bg-main) 94%, var(--color-surface-accent) 100%);
+  border-bottom: 2.5px solid var(--neon-violet);
+  box-shadow: 0 3px 20px 0 var(--neon-violet), 0 2px 10px 0 var(--electric-magenta);
+  padding: var(--space-sm) 0;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  transition: background 0.18s;
+  display: flex;
+  font-family: 'Orbitron', var(--font-family);
+  min-height: 66px;
+}
+
+.logo {
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  letter-spacing: 0.033em;
+  color: var(--neon-violet);
+  text-shadow: 0 0 10px var(--electric-magenta), 0 0 1.1px var(--matte-silver);
+  font-family: 'Orbitron', var(--font-family);
+  text-transform: uppercase;
+  filter: drop-shadow(0 1.5px 3.5px var(--electric-magenta));
+}
+
+.logo-symbol {
+  color: var(--electric-magenta);
+  font-size: 1.67em;
+  font-weight: 900;
+  text-shadow: 0 0 6px var(--neon-violet), 0 0 10px var(--electric-magenta);
+  filter: brightness(1.18);
 }
 
 /* Typography */
 .subtitle {
-  color: var(--neon-magenta);
+  color: var(--color-accent);
   font-weight: 700;
   font-size: var(--font-size-lg);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.10em;
   margin-bottom: var(--space-xs);
-  text-shadow: 0 0 10px var(--electric-blue);
+  text-shadow: 0 0 12px var(--neon-violet);
   text-transform: uppercase;
 }
 
@@ -169,125 +188,136 @@ body {
   font-weight: var(--font-weight-title);
   line-height: 1.14;
   margin: 0 0 var(--space-sm) 0;
-  color: var(--title-text);
-  text-shadow: 0 0 18px var(--hologram-pink), 0 2px 34px var(--electric-blue);
+  color: var(--color-heading);
+  text-shadow: 0 0 18px var(--electric-magenta), 0 3px 32px var(--neon-violet);
   font-family: 'Orbitron', var(--font-family);
-  letter-spacing: 0.07em;
+  letter-spacing: 0.09em;
 }
 
 .description {
   font-size: var(--font-size-lg);
   line-height: 1.5;
-  color: var(--secondary-text);
-  text-shadow: 0 0 6px var(--soft-indigo);
+  color: var(--text-secondary);
+  text-shadow: 0 0 4px var(--color-surface-accent);
   font-family: 'Share Tech Mono', 'Inter', var(--font-family);
-  max-width: 560px;
+  max-width: 600px;
   margin: 0 auto var(--space-xs) auto;
 }
 
 .btn {
   background: var(--btn-bg);
   color: var(--btn-text);
-  border: 2.2px solid var(--electric-blue);
+  border: 2px solid var(--neon-violet);
   border-radius: var(--btn-radius);
   padding: var(--btn-padding);
   font-size: var(--font-size-base);
-  font-weight: 700;
+  font-weight: 800;
   font-family: 'Orbitron', var(--font-family);
   cursor: pointer;
-  transition: background 0.21s, box-shadow 0.21s, border 0.18s, color 0.17s;
-  box-shadow: 0 0 14px 2px var(--electric-blue), 0 1.5px 12px 0 var(--neon-magenta);
+  transition: background 0.19s, box-shadow 0.17s, border 0.16s, color 0.13s;
+  box-shadow: var(--btn-shadow);
   outline: none;
   display: inline-block;
-  text-shadow: 0 0 6px var(--hologram-pink);
-  letter-spacing: 0.07em;
+  text-shadow: 0 0 6px var(--electric-magenta);
+  letter-spacing: 0.06em;
 }
 
 .btn:hover,
 .btn:focus-visible {
   background: var(--btn-bg-hover);
-  color: var(--shadow-black);
-  border-color: var(--cyber-teal);
-  box-shadow: 0 0 24px 6px var(--cyber-teal), 0 2px 17px 0 var(--hologram-pink);
+  color: var(--btn-text);
+  border-color: var(--electric-magenta);
+  box-shadow: 0 0 30px 9px var(--electric-magenta), 0 2px 17px 0 var(--neon-violet);
 }
 
 .btn-large {
-  padding: 12px 32px;
+  padding: 15px 36px;
   font-size: var(--font-size-lg);
   border-radius: calc(var(--btn-radius) + 6px);
 }
 
 /* Focus styles for accessibility */
-.btn:focus-visible, .navbar a:focus-visible {
-  outline: 2px solid var(--hologram-pink);
+.btn:focus-visible,
+.navbar a:focus-visible {
+  outline: var(--focus-outline);
   outline-offset: 3px;
 }
 
-
-/* Utility: disable text selection on logo for polish */
-.logo, .logo-symbol {
-  user-select: none;
+/* Tab styles */
+.tabs,
+.tab-list {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding: 0;
+  justify-content: center;
 }
 
-/* Cyberpunk metallic utility */
-.metallic {
-  color: var(--chrome-silver);
-  text-shadow: 0 0 4px var(--chrome-silver), 0 0 0.7px var(--shadow-black);
-  font-style: italic;
-  letter-spacing: 0.04em;
+.tab-btn {
+  background: var(--tab-bg);
+  color: var(--tab-text);
+  font-weight: 500;
+  padding: 9px 25px;
+  outline: none;
+  font-size: 1em;
+  border-radius: 7px;
+  border: var(--tab-outline);
+  box-shadow: none;
+  min-width: 116px;
+  cursor: pointer;
+  transition: background 0.13s, color 0.13s, border 0.13s;
 }
 
-/* HUD border/glow utility */
-.hud-glow {
-  box-shadow: 0 0 12px 2px var(--cyber-teal), 0 0 0 3px var(--electric-blue) inset;
-  border: 2px solid var(--cyber-teal);
+.tab-btn.active,
+.tab-btn[aria-selected="true"] {
+  background: var(--tab-bg-active);
+  color: var(--tab-text-active);
+  border: 2.3px solid var(--electric-magenta);
+  font-weight: 700;
+  box-shadow: 0 2px 13px var(--neon-violet);
+}
+
+.tab-btn:focus-visible {
+  outline: var(--focus-outline);
+  z-index: 2;
+}
+
+.card, .surface, .modal {
+  background: var(--card-bg);
+  border: var(--card-border);
+  box-shadow: var(--shadow-main);
   border-radius: var(--radius);
 }
 
-/* Ambient background accent */
-.ambient-bg {
-  background: linear-gradient(100deg, var(--midnight-purple) 65%, var(--soft-indigo) 100%);
-  box-shadow: 0 0 32px var(--soft-indigo) inset;
+/* Overlay, Modal, and Pop Theme */
+.overlay,
+.modal-overlay {
+  background: var(--overlay-gradient);
+  color: var(--text-overlay);
   border-radius: var(--radius);
+  box-shadow: 0 3px 33px 3px var(--electric-magenta);
+  border: 2.2px solid var(--electric-magenta);
 }
 
-@media (max-width: 600px) {
-  .hero {
-    padding-top: var(--space-xl);
-    padding-bottom: var(--space-lg);
-  }
-  .title {
-    font-size: 1.7rem;
-  }
-  .subtitle {
-    font-size: 1rem;
-  }
-  .description {
-    font-size: 1rem;
-  }
-  .container {
-    padding: 0 var(--space-xs);
-  }
-}
-/* Remove default input/button styling where relevant */
-input, button, textarea, select {
+/* Inputs, textareas, selects: Modern */
+input, textarea, select {
   font: inherit;
   border-radius: var(--radius);
-  background: rgba(24, 19, 49, 0.95);
-  color: var(--chrome-silver);
-  border: 1.7px solid var(--soft-indigo);
-  padding: 8px 13px;
+  background: var(--color-surface);
+  color: var(--text-primary);
+  border: 1.6px solid var(--muted-lilac);
+  padding: 10px 15px;
   transition: box-shadow 0.17s, border 0.17s;
-  box-shadow: 0 0 0 0 var(--electric-blue);
+  box-shadow: 0 0 0 0 var(--neon-violet);
 }
 
 input:focus, textarea:focus, select:focus {
   outline: none;
-  border-color: var(--electric-blue);
-  box-shadow: 0 0 10px 2px var(--electric-blue), 0 0 2px 0 var(--hologram-pink);
+  border-color: var(--electric-magenta);
+  box-shadow: 0 0 10px 2px var(--neon-violet), 0 0 2px 0 var(--electric-magenta);
 }
 
-/* Add a visually hidden class for accessibility utilities */
+/* Misc utility classes */
 .visually-hidden {
   position: absolute !important;
   width: 1px !important;
@@ -300,23 +330,45 @@ input:focus, textarea:focus, select:focus {
   border: 0 !important;
 }
 
-/* Optional: add glitch accent for cyberpunk inspiration; can be used in overlays/accent text */
-.glitch {
-  color: var(--hologram-pink);
-  text-shadow:
-    1px 0 var(--neon-magenta),
-    2px 0 var(--electric-blue),
-    -1.5px 0 var(--cyber-teal),
-    0 2px var(--soft-indigo);
-  animation: glitch 1.7s infinite linear alternate-reverse;
-  font-weight: 800;
+.text-accent { color: var(--color-accent)!important; }
+.text-primary { color: var(--text-primary)!important; }
+.text-lg { font-size: var(--font-size-lg)!important; }
+.bg-gradient { background: var(--color-bg-gradient)!important; }
+.bg-surface { background: var(--color-surface)!important; }
+.bg-overlay { background: var(--overlay-gradient)!important; }
+.shadow-card { box-shadow: var(--shadow-card)!important; }
+
+/* Responsive tweaks for modern layout */
+@media (max-width: 600px) {
+  .hero {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-lg);
+  }
+  .title {
+    font-size: 1.6rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
+  .description {
+    font-size: 1rem;
+  }
+  .container {
+    padding: 0 var(--space-xs);
+  }
 }
 
-@keyframes glitch {
-  0% { text-shadow: 2px 0 var(--electric-blue), -2px 0 var(--hologram-pink); }
-  20% { text-shadow: -2px 0 var(--neon-magenta), 2px 1.5px var(--cyber-teal);}
-  40% { text-shadow: 1px -2px var(--hologram-pink);}
-  60% { text-shadow: 0 0 6px var(--electric-blue);}
-  80% { text-shadow: 2px 2px var(--neon-magenta);}
-  100% { text-shadow: -2px -1.5px var(--cyber-teal);}
+/* Eliminate default BUTTON style override with input, use btn class only */
+button {
+  border-radius: var(--btn-radius);
+  font: inherit;
+  cursor: pointer;
+}
+
+/* Minor effect for overlay pop modals and focus rings */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: var(--color-bg-gradient), var(--color-bg-main);
+    color: var(--text-primary);
+  }
 }
