@@ -1,20 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-// Step: Welcome/Landing
-function Welcome() {
-  return (
-    <section className="container hero" style={{textAlign: 'center', paddingTop: '5rem'}}>
-      <div className="subtitle">Your Digital & Legal Safety Companion</div>
-      <h1 className="title">Welcome to the CyberLegal Insight Hub</h1>
-      <div className="description">
-        Assess your cyber security and legal awareness in a unified flow.<br/>
-        Start your journey to a safer digital and legal life.
-      </div>
-      <a href="/quiz" className="btn btn-large" style={{marginTop: '1.2rem'}}>Get Started</a>
-    </section>
-  );
-}
+import WelcomePage from "./WelcomePage";
 
 // Step: Cyber Quiz
 function Quiz() {
@@ -72,12 +59,16 @@ function ThankYou() {
   );
 }
 
+/**
+ * AppRouter wraps all routes for CyberLegal Insight Hub.
+ * Home ("/") uses polished WelcomePage with branding, intro, illustration, CTA.
+ */
 // PUBLIC_INTERFACE
 function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Welcome />} />
+        <Route path="/" element={<WelcomePage />} />
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/results" element={<Results />} />
