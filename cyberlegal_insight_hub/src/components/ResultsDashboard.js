@@ -317,6 +317,7 @@ function ResultsDashboard({
       <div
         role="region"
         aria-label="Risk scores"
+        className="meter-animate-pulse"
         style={{
           display: "flex",
           justifyContent: "center",
@@ -348,6 +349,7 @@ function ResultsDashboard({
 
       {/* Tabbed tips/summary/action plan */}
       <div
+        className="card-pop"
         style={{
           background: "var(--surface)",
           borderRadius: 14,
@@ -409,6 +411,7 @@ function ResultsDashboard({
           role="tabpanel"
           tabIndex={0}
           aria-labelledby={`tab_${activeTab}`}
+          className="tab-panel-animate-in"
           style={{ minHeight: 80 }}
         >
           {activeTab === "cyber" && renderCyberTips()}

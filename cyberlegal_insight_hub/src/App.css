@@ -499,6 +499,120 @@ select:focus-visible {
   box-shadow: var(--shadow-main);
   border-radius: var(--radius);
   transition: box-shadow 0.19s, border 0.14s, background 0.17s;
+  /* Modal/card will use entry/exit animation triggers */
+  will-change: opacity, transform;
+  opacity: 1;
+}
+
+/* Fade/slide-in & out for modal, card, tab panels */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+@keyframes slideUpIn {
+  from { opacity: 0; transform: translateY(60px) scale(0.96);}
+  to   { opacity: 1; transform: none;}
+}
+@keyframes slideDownOut {
+  from { opacity: 1; transform: none;}
+  to   { opacity: 0; transform: translateY(60px) scale(0.96);}
+}
+@keyframes scaleIn {
+  0% { opacity: 0; transform: scale(0.97);}
+  80% { opacity: 1; transform: scale(1.05);}
+  100% { opacity: 1; transform: scale(1);}
+}
+@keyframes scaleOut {
+  from { opacity: 1; transform: scale(1);}
+  to { opacity: 0; transform: scale(0.97);}
+}
+
+/* Utility classes for applying entry/exit/effects */
+.animate-fade-in    { animation: fadeIn 0.44s cubic-bezier(.35,1.05,.57,1) both; }
+.animate-fade-out   { animation: fadeOut 0.35s cubic-bezier(.42,0,.58,1) both; }
+.animate-slide-up-in     { animation: slideUpIn 0.50s cubic-bezier(.25,0,.53,1.17) both; }
+.animate-slide-down-out  { animation: slideDownOut 0.42s cubic-bezier(.36,.9,.45,1) both; }
+.animate-scale-in   { animation: scaleIn 0.38s cubic-bezier(.26,1.03,.45,0.98) both; }
+.animate-scale-out  { animation: scaleOut 0.28s cubic-bezier(.47,1.07,.56,0.91) both; }
+
+/* Modal entry/exit applied (JS adds .animate-* on mount/unmount) */
+.modal,
+.card,
+.hero,
+.surface {
+  /* allow animation utility classes to override defaults */
+}
+
+.fade-appear, .fade-enter { opacity: 0; }
+.fade-appear-active,
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 0.44s cubic-bezier(.35,1.05,.57,1);
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(.39,.58,.57,1);
+}
+
+/* Tab panels: fade/slide effect for mount/unmount */
+.tab-panel-animate-in {
+  animation: fadeIn 0.41s cubic-bezier(.35,.99,.61,1) both;
+}
+.tab-panel-animate-out {
+  animation: fadeOut 0.29s cubic-bezier(.29,.98,.52,1) both;
+}
+/* Cards: brief pop effect when added or on focus */
+.card-pop,
+.surface-pop {
+  animation: scaleIn 0.38s cubic-bezier(.26,1.03,.45,0.98) both;
+}
+/* Modal overlays: fade background in */
+.modal-overlay-fade {
+  animation: fadeIn 0.32s cubic-bezier(.45,1,.45,1.18) both;
+}
+
+/* Feedback cues (success/failure pulse/fade) */
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 var(--color-success); }
+  30% { box-shadow: 0 0 0 11px var(--color-success); }
+  100% { box-shadow: 0 0 0 0 var(--color-success); }
+}
+@keyframes fadeSuccess {
+  0% { opacity: 0; transform: scale(0.9);}
+  38% { opacity: 1; transform: scale(1.03);}
+  100% { opacity: 1; transform: scale(1);}
+}
+.form-success-message,
+.field-success {
+  animation: fadeSuccess 0.35s cubic-bezier(.48,1.5,.47,1.04), pulseGlow 0.8s cubic-bezier(.43,1.22,.47,1.1);
+}
+
+/* Error/failure animated feedback pulse+shake */
+@keyframes errorPulse {
+  0% { box-shadow: 0 0 0 0 var(--color-danger) }
+  50% { box-shadow: 0 0 0 13px var(--color-danger);}
+  100% { box-shadow: 0 0 0 0 var(--color-danger);}
+}
+.form-error-message, .field-error {
+  /* retain shake for error, add errorPulse */
+  animation: shake 0.23s, errorPulse 0.7s cubic-bezier(.49,1.03,.59,1.05);
+}
+
+/* Optional: pulse animation for dashboard score meters on update, attached with JS if desired */
+@keyframes meterPulse {
+  0% { filter: brightness(1) drop-shadow(0 0 0 #2563eb77);}
+  35% { filter: brightness(1.05) drop-shadow(0 0 18px #2563eb77);}
+  100% { filter: brightness(1) drop-shadow(0 0 0 #2563eb77);}
+}
+.meter-animate-pulse {
+  animation: meterPulse 0.8s cubic-bezier(.43,1.21,.56,1.06);
 }
 
 /* --- ENHANCED CARD/CONTAINER MICRO-INTERACTIONS AND ACCESSIBILITY --- */
