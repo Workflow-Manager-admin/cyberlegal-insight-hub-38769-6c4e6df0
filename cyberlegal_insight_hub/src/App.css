@@ -241,37 +241,47 @@ body {
   color: var(--btn-text);
   border: none;
   border-radius: calc(var(--btn-radius) + 7px);
-  padding: 17px 38px;
-  font-size: var(--font-size-md);
+  padding: 18px 40px; /* Larger touch area for accessibility */
+  font-size: var(--font-size-lg);
   font-weight: 700;
   font-family: var(--font-family);
+  min-height: 52px; /* Touch target size for buttons */
+  min-width: 54px;
+  line-height: 1.32;
   cursor: pointer;
   box-shadow: 0 4px 19px 1.5px rgba(37,99,235,0.16), 0 2.5px 12px 0 rgba(16,17,25,0.13);
   outline: none;
   display: inline-block;
   text-shadow: none;
   letter-spacing: 0.055em;
-  transition:
-    background 0.16s,
-    box-shadow 0.21s,
-    border 0.12s,
-    color 0.12s,
-    transform 0.13s;
+  transition: 
+    background 0.18s cubic-bezier(.6,.2,.4,1), 
+    box-shadow 0.23s cubic-bezier(.46,1.14,.3,1), 
+    border 0.15s, 
+    color 0.15s,
+    outline 0.14s,
+    transform 0.13s cubic-bezier(.36,1.08,.3,1);
   will-change: transform, box-shadow, background;
 }
 
 .btn:hover, .btn:focus-visible {
   background: var(--btn-bg-hover);
   color: var(--btn-text);
-  box-shadow: 0 8px 26px 6px rgba(37,99,235,0.20), 0 2.5px 15px 0 rgba(16,17,25,0.19);
-  transform: translateY(-2px) scale(1.045) rotate(-0.2deg);
-  transition-duration: 0.16s, 0.16s, 0.09s;
+  box-shadow: 0 0 0 4px rgba(37,99,235,0.36), 0 10px 30px 8px rgba(37,99,235,0.19), 0 2.5px 18px 0 rgba(16,17,25,0.18);
+  outline: 3.7px solid #2563eb !important;
+  outline-offset: 2.5px;
+  border-color: #2563eb;
+  z-index: 12;
+  transform: translateY(-2px) scale(1.06);
+  transition-duration: 0.19s, 0.17s, 0.09s;
 }
 
-.btn:active {
-  box-shadow: 0 1.4px 6px 1.1px rgba(37,99,235,0.08);
-  transform: translateY(1.5px) scale(0.96);
-  transition-duration: 0.07s;
+.btn:active, .btn:focus:active {
+  box-shadow: 0 0 0 9px rgba(37,99,235,0.16) inset, 0 1.4px 6px 1.1px rgba(37,99,235,0.10);
+  outline: 2.6px solid #0ea5e9;
+  transform: scale(0.96);
+  filter: brightness(0.92);
+  transition-duration: 0.08s;
 }
 
 .btn-large {
@@ -308,37 +318,82 @@ select:focus-visible {
   background: var(--tab-bg);
   color: var(--tab-text);
   font-weight: 600;
-  padding: 15px 40px;
+  padding: 17px 44px;
   outline: none;
-  font-size: 1.11em;
-  border-radius: 16px;
+  font-size: 1.13em;
+  border-radius: 18px;
   border: var(--tab-outline);
-  min-width: 140px;
+  min-width: 142px;
+  min-height: 51px;
   cursor: pointer;
   transition:
-    background 0.16s,
-    color 0.12s,
-    border 0.13s,
-    box-shadow 0.17s,
-    transform 0.12s;
+    background 0.22s cubic-bezier(.36,1.08,.3,1),
+    color 0.14s,
+    border 0.17s,
+    box-shadow 0.21s,
+    outline 0.15s,
+    transform 0.14s;
   box-shadow: none;
   will-change: box-shadow, background, border;
+  touch-action: manipulation;
 }
 
+/* Tab active state */
 .tab-btn.active,
 .tab-btn[aria-selected="true"] {
   background: var(--tab-bg-active);
   color: var(--tab-text-active);
   border: 2.9px solid var(--color-accent);
   font-weight: 800;
-  box-shadow: 0 3.5px 19px 1.5px rgba(37,99,235,0.15);
-  transform: translateY(-2px) scale(1.045);
-  transition-duration: 0.11s, 0.12s;
+  box-shadow: 0 0 0 5px rgba(37,99,235,0.13), 0 4px 19px 2px rgba(37,99,235,0.14);
+  transform: translateY(-2px) scale(1.06);
+  transition-duration: 0.13s;
 }
 
-.tab-btn:focus-visible {
-  outline: var(--focus-outline);
-  z-index: 2;
+/* Tab focus outlined, extra visible (blue glow) */
+.tab-btn:focus-visible, .tab-btn:hover {
+  outline: 3.5px solid #2563eb !important;
+  outline-offset: 2.7px;
+  border: 2.1px solid #2563eb;
+  z-index: 3;
+  box-shadow: 0 0 0 7px rgba(37,99,235,0.23);
+  background: var(--tab-bg-active);
+  color: var(--tab-text-active);
+  font-weight: 800;
+  transform: scale(1.04);
+  transition-duration: 0.16s, 0.14s, 0.088s;
+}
+
+/* Links in navbar and throughout app: bold blue focus glow */
+.navbar a, a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0 2.5px;
+  border-radius: 7px;
+  transition: 
+    color 0.11s,
+    box-shadow 0.14s,
+    background 0.14s;
+}
+
+.navbar a:hover, a:hover, .navbar a:focus-visible, a:focus-visible {
+  color: #2563eb;
+  outline: 3.1px solid #2563eb !important;
+  outline-offset: 2.5px;
+  background: rgba(37,99,235,0.08);
+  box-shadow: 0 0 0 6px rgba(37,99,235,0.18);
+  text-decoration: underline;
+  z-index: 9;
+}
+
+.tab-btn:active {
+  outline: 2px solid #0ea5e9;
+  background: var(--blue-accent-softer);
+  color: var(--tab-text-active);
+  box-shadow: 0 0 0 12px rgba(37,99,235,0.12) inset;
+  transform: scale(0.97);
+  transition-duration: 0.11s;
 }
 
 .card, .surface, .modal {
@@ -375,11 +430,15 @@ input, textarea, select {
 }
 
 input:focus, textarea:focus, select:focus {
-  outline: none;
+  outline: 3.3px solid #2563eb !important;
+  outline-offset: 2.6px;
   border-color: var(--color-primary-light);
   background: var(--color-bg-surface);
-  box-shadow: 0 0 21px 4px var(--color-primary-light), 0 0 2px 0 var(--color-accent);
-  transition: border 0.13s, box-shadow 0.13s, background 0.09s;
+  box-shadow: 
+    0 0 14px 3.5px #2563eb, 
+    0 0 0 9px rgba(37,99,235,0.11),
+    0 0 2px 0 var(--color-accent);
+  transition: border 0.13s, box-shadow 0.13s, background 0.09s, outline 0.13s;
 }
 
 .visually-hidden {
@@ -443,4 +502,17 @@ button {
     background: var(--color-bg-gradient), var(--color-bg-main);
     color: var(--text-primary);
   }
+}
+
+/* Universal touch and micro-interaction feedback for actionable elements */
+.touch-feedback:active,
+.btn:active,
+.tab-btn:active,
+.navbar a:active,
+a:active {
+  filter: brightness(0.93);
+  background: rgba(37,99,235,0.07) !important;
+  box-shadow: 0 0 0 6px rgba(37,99,235,0.21) inset;
+  outline: 2px solid #0ea5e9;
+  transition: filter 0.08s, box-shadow 0.11s, outline 0.08s;
 }
