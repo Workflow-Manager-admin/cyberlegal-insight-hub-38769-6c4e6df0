@@ -118,29 +118,92 @@ body {
   z-index: 0;
 }
 
+/* --- MODERNIZED CONTAINER & CARD STYLES FOR DISTINCTION, ELEVATION, CONTRAST, AND SMOOTH INTERACTION --- */
 .container {
   max-width: 980px;
   margin: 0 auto;
   width: 100%;
   padding: var(--space-lg) var(--space-xl) var(--space-lg) var(--space-xl);
   box-sizing: border-box;
-  background: transparent;
+  background: linear-gradient(120deg, var(--color-card) 92%, var(--color-bg-main) 100%);
   border-radius: var(--radius-lg);
-  box-shadow: 0 8px 40px 0 rgba(37,99,235,0.055), 0 2px 14px 0 rgba(16,17,25,0.089);
+  /* Layered shadow: strong accented shadow plus softer ambient */
+  box-shadow: 
+    0 5px 32px 0 rgba(37,99,235,0.18),
+    0 2px 14px 0 rgba(16,17,25,0.16),
+    0 0 0 2.2px var(--color-primary-light);
+  border: 2.5px solid var(--color-border);
+  /* Thin blue highlight edge for clear sectioning */
+  outline: 0.5px solid var(--blue-accent);
   z-index: 1;
-  transition: box-shadow 0.22s, background 0.19s;
+  transition: 
+    box-shadow 0.29s cubic-bezier(.5,.12,.2,1), 
+    background 0.19s cubic-bezier(.27,.74,.34,1), 
+    border 0.16s cubic-bezier(.3,.8,.22,1);
 }
 
+/* Card, main elevated surfaces & hero blocks */
 .card,
 .hero,
 .surface {
-  background: var(--card-bg);
-  border: var(--card-border);
-  box-shadow: var(--shadow-main);
+  background: linear-gradient(112deg, rgba(35,37,48,0.99) 92%, rgba(37,99,235,0.10) 100%);
+  border: 2.2px solid var(--blue-accent-light);
+  box-shadow:
+    0 8px 44px 1px #2563eb29,
+    0 2px 21px 0 #10111918,
+    0 0 0 2.5px #2563eb33;
   border-radius: var(--radius-lg);
-  transition: box-shadow 0.21s, border 0.13s, background 0.18s;
+  transition: 
+    box-shadow 0.23s cubic-bezier(.35,1.5,.25,1),
+    border 0.13s,
+    background 0.19s cubic-bezier(.24,.65,.44,1.12);
   padding: var(--space-lg) var(--space-xl);
   margin-bottom: var(--space-lg);
+
+  /* Typography for excellent clarity and contrast */
+  color: var(--text-primary) !important;
+  font-family: var(--font-family);
+  font-weight: 500;
+  letter-spacing: 0.012em;
+  text-shadow: 0 0 13px #10111944, 0 0 2px #2563eb11;
+}
+
+/* Strong accent for tab/card container focus/hover (for accessibility cues) */
+.container:focus-within, .card:focus-within, .surface:focus-within, 
+.container:hover, .card:hover, .surface:hover {
+  box-shadow:
+    0 0 0 3.5px #2563eb44,
+    0 16px 44px 2px #2563eb26,
+    0 4px 18px 0 #191c2340;
+  border-color: var(--blue-accent);
+  outline: 2px solid var(--blue-accent-light);
+  transition: box-shadow 0.19s, border-color 0.17s, outline 0.13s;
+}
+
+/* Clear shadow accent for cards inside containers */
+.container .card, .container .surface {
+  box-shadow:
+    0 2.5px 17px 3px #2563eb18,
+    0 0.5px 5px 0 #10111918;
+  border-left: 4px solid var(--color-primary);
+  border-right: 2px solid var(--blue-accent-light);
+  background: linear-gradient(100deg, rgba(35,37,48,1) 90%, #2563eb12 100%);
+}
+
+/* Extra vivid/accessible text in containers and cards */
+.container, .card, .hero, .surface {
+  color: #e6ebf7;
+  text-shadow: 0 0 1.7px #10111978, 0 0 0.7px #2563eb11;
+}
+
+/* Section containers: higher contrast by default on dark */
+@media (prefers-color-scheme: dark) {
+  .container, .card, .hero, .surface {
+    background: linear-gradient(117deg, #1b1d28 82%, #2563eb14 100%);
+    border-color: var(--blue-accent);
+    color: #f1f5ff;
+    text-shadow: 0 0 2px #000c2c77, 0 2px 27px #2563eb15;
+  }
 }
 
 .hero {
@@ -438,6 +501,32 @@ select:focus-visible {
   transition: box-shadow 0.19s, border 0.14s, background 0.17s;
 }
 
+/* --- ENHANCED CARD/CONTAINER MICRO-INTERACTIONS AND ACCESSIBILITY --- */
+.card:active, .surface:active, .container:active, .hero:active {
+  filter: brightness(1.09);
+  box-shadow:
+    0 0 0 10px #0ea5e91a inset,
+    0 5px 25px 3px #2563eb23,
+    0 1.5px 6px 1.1px #2563eb18;
+  outline: 2.6px solid #0ea5e9;
+  transition: filter 0.11s, box-shadow 0.12s, outline 0.10s;
+  transform: scale(0.995);
+}
+
+.card:focus-visible, .container:focus-visible, .hero:focus-visible, .surface:focus-visible {
+  outline: 3.1px solid var(--blue-accent) !important;
+  outline-offset: 2.3px;
+  border-color: var(--blue-accent-light);
+  box-shadow: 0 0 0 8.5px #2563eb36, 0 2.5px 13px #2563eb16;
+  z-index: 13;
+  transition: box-shadow 0.13s, outline 0.13s, border 0.1s;
+}
+
+/* Distinct container corners and text for elevated sections */
+.card, .container, .surface, .modal, .hero {
+  border-radius: 22px;
+}
+
 /* Overlay, Modal, and Pop Theme */
 .overlay,
 .modal-overlay {
@@ -517,11 +606,15 @@ input:focus, textarea:focus, select:focus {
   .container {
     padding: var(--space-sm) var(--space-xs);
     max-width: 99vw;
-    border-radius: var(--radius);
-    box-shadow: 0 3px 15px 0 rgba(37,99,235,0.02), 0 1px 4px 0 rgba(16,17,25,0.06);
+    border-radius: 13px;
+    box-shadow: 0 3px 15px 0 rgba(37,99,235,0.09), 0 1px 4px 0 rgba(16,17,25,0.08);
+    border: 1.7px solid var(--blue-accent-light);
+    color: var(--text-primary) !important;
+  }
+  .card, .surface, .hero {
+    border-radius: 15px;
   }
 }
-
 /* Eliminate default BUTTON style override with input, use btn class only */
 button {
   border-radius: var(--btn-radius);
