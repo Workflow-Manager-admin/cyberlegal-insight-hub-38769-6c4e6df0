@@ -236,59 +236,87 @@ body {
   margin: 0 auto var(--space-xs) auto;
 }
 
+/* --- ENHANCED BUTTON STYLES FOR ACCESSIBILITY, MICRO-ANIMATION & INTERACTIVITY --- */
 .btn {
   background: var(--btn-bg);
   color: var(--btn-text);
   border: none;
   border-radius: calc(var(--btn-radius) + 7px);
-  padding: 18px 40px; /* Larger touch area for accessibility */
+  padding: 22px 48px; /* Larger touch area for accessibility & mobile */
   font-size: var(--font-size-lg);
   font-weight: 700;
   font-family: var(--font-family);
-  min-height: 52px; /* Touch target size for buttons */
-  min-width: 54px;
+  min-height: 58px; /* Large minimum for comfortable tap target */
+  min-width: 62px;
   line-height: 1.32;
   cursor: pointer;
-  box-shadow: 0 4px 19px 1.5px rgba(37,99,235,0.16), 0 2.5px 12px 0 rgba(16,17,25,0.13);
+  box-shadow: 0 4px 19px 1.5px rgba(37,99,235,0.18), 0 2.5px 12px 0 rgba(16,17,25,0.15);
   outline: none;
   display: inline-block;
   text-shadow: none;
   letter-spacing: 0.055em;
-  transition: 
-    background 0.18s cubic-bezier(.6,.2,.4,1), 
-    box-shadow 0.23s cubic-bezier(.46,1.14,.3,1), 
-    border 0.15s, 
+  position: relative;
+  user-select: none;
+  touch-action: manipulation;
+  /* Micro-interaction transitions, for tactile & dynamic feedback */
+  transition:
+    background 0.20s cubic-bezier(.6,.2,.4,1),
+    box-shadow 0.25s cubic-bezier(.32,1.19,.3,1),
+    border 0.17s,
     color 0.15s,
-    outline 0.14s,
-    transform 0.13s cubic-bezier(.36,1.08,.3,1);
-  will-change: transform, box-shadow, background;
+    outline 0.13s,
+    transform 0.15s cubic-bezier(.36,1.08,.3,1),
+    filter 0.12s;
+  will-change: transform, box-shadow, background, filter;
 }
 
+/* HOVER/FOCUS with VISIBLE BLUE OUTLINE + PULSE MICRO-ANIMATION */
 .btn:hover, .btn:focus-visible {
   background: var(--btn-bg-hover);
   color: var(--btn-text);
-  box-shadow: 0 0 0 4px rgba(37,99,235,0.36), 0 10px 30px 8px rgba(37,99,235,0.19), 0 2.5px 18px 0 rgba(16,17,25,0.18);
-  outline: 3.7px solid #2563eb !important;
+  box-shadow:
+    0 0 0 6px #2563eb33,
+    0 12px 40px 10px #2563eb1a,
+    0 3px 14px 0 #10111933;
+  outline: 4px solid #2563eb !important;
   outline-offset: 2.5px;
   border-color: #2563eb;
   z-index: 12;
-  transform: translateY(-2px) scale(1.06);
-  transition-duration: 0.19s, 0.17s, 0.09s;
+  transform: translateY(-2.5px) scale(1.08);
+  transition-duration: 0.16s, 0.14s, 0.11s;
+  animation: btnPulse 0.24s cubic-bezier(.32,1.89,.5,1.34);
+}
+/* Accessibility focus ring also on :focus-visible for ALL actionable */
+.btn:focus-visible {
+  outline: 4px solid #2563eb !important;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 8.5px #2563eb29, 0 2.5px 18px #2563eb11;
+  transition: box-shadow 0.14s, outline 0.13s;
+}
+
+/* Pulse micro-animation for tactile feedback */
+@keyframes btnPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 #2563eb33; }
+  70% { transform: scale(1.10); box-shadow: 0 0 0 9px #2563eb33; }
+  100% { transform: scale(1.08); }
 }
 
 .btn:active, .btn:focus:active {
-  box-shadow: 0 0 0 9px rgba(37,99,235,0.16) inset, 0 1.4px 6px 1.1px rgba(37,99,235,0.10);
+  box-shadow: 0 0 0 11px #0ea5e91d inset, 0 1.5px 7px 1.1px #2563eb33;
   outline: 2.6px solid #0ea5e9;
-  transform: scale(0.96);
-  filter: brightness(0.92);
-  transition-duration: 0.08s;
+  transform: scale(0.93);
+  filter: brightness(0.93);
+  transition-duration: 0.07s;
 }
 
 .btn-large {
-  padding: 21px 58px;
+  padding: 27px 68px;
   font-size: var(--font-size-lg);
-  border-radius: calc(var(--btn-radius) + 16px);
-  box-shadow: 0 6px 35px 2px rgba(37,99,235,0.15), 0 4px 15px 0 rgba(16,17,25,0.12);
+  border-radius: calc(var(--btn-radius) + 22px);
+  min-height: 71px;
+  min-width: 148px;
+  box-shadow: 0 8px 40px 3.5px #2563eb18, 0 6px 18px 0 #10111918;
+  letter-spacing: 0.06em;
 }
 
 /* Focus styles for accessibility, including fields */
@@ -318,24 +346,26 @@ select:focus-visible {
   background: var(--tab-bg);
   color: var(--tab-text);
   font-weight: 600;
-  padding: 17px 44px;
+  padding: 22px 58px;
   outline: none;
   font-size: 1.13em;
-  border-radius: 18px;
+  border-radius: 20px;
   border: var(--tab-outline);
-  min-width: 142px;
-  min-height: 51px;
+  min-width: 168px;
+  min-height: 58px;
   cursor: pointer;
+  box-shadow: none;
+  touch-action: manipulation;
   transition:
     background 0.22s cubic-bezier(.36,1.08,.3,1),
     color 0.14s,
     border 0.17s,
-    box-shadow 0.21s,
+    box-shadow 0.23s,
     outline 0.15s,
-    transform 0.14s;
-  box-shadow: none;
-  will-change: box-shadow, background, border;
-  touch-action: manipulation;
+    transform 0.15s cubic-bezier(.36,1.08,.3,1);
+  will-change: box-shadow, background, border, transform;
+  letter-spacing: 0.04em;
+  user-select: none;
 }
 
 /* Tab active state */
@@ -364,6 +394,16 @@ select:focus-visible {
   transition-duration: 0.16s, 0.14s, 0.088s;
 }
 
+/* Tactile feedback for tab buttons */
+.tab-btn:active {
+  outline: 2.6px solid #0ea5e9;
+  background: var(--blue-accent-softer);
+  color: var(--tab-text-active);
+  box-shadow: 0 0 0 18px #2563eb17 inset, 0 0.5px 5px 0 #0ea5e933;
+  transform: scale(0.96);
+  transition-duration: 0.09s;
+}
+
 /* Links in navbar and throughout app: bold blue focus glow */
 .navbar a, a {
   color: var(--color-primary);
@@ -379,23 +419,17 @@ select:focus-visible {
 
 .navbar a:hover, a:hover, .navbar a:focus-visible, a:focus-visible {
   color: #2563eb;
-  outline: 3.1px solid #2563eb !important;
-  outline-offset: 2.5px;
-  background: rgba(37,99,235,0.08);
-  box-shadow: 0 0 0 6px rgba(37,99,235,0.18);
+  outline: 3.6px solid #2563eb !important;
+  outline-offset: 2.8px;
+  background: rgba(37,99,235,0.10);
+  box-shadow: 0 0 0 13px #2563eb16;
   text-decoration: underline;
-  z-index: 9;
+  z-index: 10;
+  transform: scale(1.04);
+  transition: outline 0.13s, box-shadow 0.14s, transform 0.12s;
 }
 
-.tab-btn:active {
-  outline: 2px solid #0ea5e9;
-  background: var(--blue-accent-softer);
-  color: var(--tab-text-active);
-  box-shadow: 0 0 0 12px rgba(37,99,235,0.12) inset;
-  transform: scale(0.97);
-  transition-duration: 0.11s;
-}
-
+/* Card, Modal backgrounds */
 .card, .surface, .modal {
   background: var(--card-bg);
   border: var(--card-border);
@@ -510,9 +544,19 @@ button {
 .tab-btn:active,
 .navbar a:active,
 a:active {
-  filter: brightness(0.93);
-  background: rgba(37,99,235,0.07) !important;
-  box-shadow: 0 0 0 6px rgba(37,99,235,0.21) inset;
-  outline: 2px solid #0ea5e9;
-  transition: filter 0.08s, box-shadow 0.11s, outline 0.08s;
+  filter: brightness(0.92);
+  background: rgba(37,99,235,0.13) !important;
+  box-shadow: 0 0 0 16px #2563eb18 inset;
+  outline: 2.7px solid #0ea5e9;
+  transition: filter 0.08s, box-shadow 0.10s, outline 0.08s;
+  transform: scale(0.97);
+}
+
+/* Utility class for large touch area - for optional use */
+.actionable-large {
+  min-height: 60px;
+  min-width: 60px;
+  padding: 18px 36px;
+  font-size: 1.13rem;
+  border-radius: 18px;
 }
