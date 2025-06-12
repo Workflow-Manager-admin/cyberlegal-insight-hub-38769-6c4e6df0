@@ -89,9 +89,9 @@ function ContractUpload({ onContinue, onSkip }) {
         style={{
           width: "100%",
           background: "var(--surface)",
-          borderRadius: 14,
-          boxShadow: "0 2px 12px rgba(37,99,235,0.06)",
-          padding: "1.8em 2em 1.3em 2em",
+          borderRadius: 17,
+          boxShadow: "0 2px 12px rgba(37,99,235,0.09)",
+          padding: "2.2em 2.2em 1.3em 2.1em",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -100,47 +100,63 @@ function ContractUpload({ onContinue, onSkip }) {
         aria-labelledby="uploadContractTitle"
         autoComplete="off"
       >
-        <label htmlFor="contract-textarea" style={{
-            fontWeight: 600,
-            fontSize: "1.14rem",
-            marginBottom: 8,
-            alignSelf: "flex-start"
-          }}>
+        <label
+          htmlFor="contract-textarea"
+          className="form-label"
+          style={{
+            marginBottom: 7,
+            alignSelf: "flex-start",
+            fontWeight: 700,
+            fontSize: "1.18rem",
+            color: "var(--text-secondary)",
+            letterSpacing: "0.015em",
+          }}
+        >
           Paste Contract Text Here
         </label>
         <textarea
           id="contract-textarea"
+          className={error ? "error" : ""}
           value={contractText}
           onChange={handleTextareaChange}
-          rows={10}
+          rows={8}
           placeholder="Paste your contract..."
           style={{
             width: "100%",
             maxWidth: 440,
-            fontSize: "1.07rem",
-            padding: "10px",
-            border: "1.2px solid #e5e7eb",
-            borderRadius: 8,
-            minHeight: 136,
+            fontSize: "1.13rem",
+            minHeight: 144,
             marginBottom: 17,
-            background: "#f8fafc",
-            color: "var(--primary-text)",
-            resize: "vertical"
+            background: "var(--color-card)",
+            color: "var(--text-primary)",
+            border: "2px solid var(--color-border)",
+            borderRadius: "17px",
+            padding: "20px 1.3em",
+            resize: "vertical",
+            boxShadow: error
+              ? "0 0 0 5px #e8314713"
+              : "0 3.5px 15px 0 rgba(37,99,235,0.09)",
+            outline: "none"
           }}
+          aria-invalid={error ? "true" : "false"}
         />
 
-        <div style={{
+        <div
+          style={{
             width: "100%",
             display: "flex",
             alignItems: "center",
-            gap: 15,
-            marginBottom: 14
-          }}>
-          <span style={{
-              fontSize: "1.03rem",
-              fontWeight: 500,
-              color: "var(--secondary-text)"
-            }}>
+            gap: 18,
+            marginBottom: 17,
+          }}
+        >
+          <span
+            style={{
+              fontSize: "1.1rem",
+              fontWeight: 600,
+              color: "var(--text-secondary)",
+            }}
+          >
             or
           </span>
           <input
@@ -153,50 +169,51 @@ function ContractUpload({ onContinue, onSkip }) {
           />
           <button
             type="button"
-            className="btn"
+            className="btn actionable-large"
             style={{
               background: "var(--color-accent)",
               color: "#222",
-              padding: "7px 18px",
               fontWeight: 600,
-              borderRadius: 6,
-              boxShadow: "0 1.2px 7px rgba(251,191,36,0.06)",
-              marginLeft: 0,
-              fontSize: "1rem"
+              borderRadius: 7,
+              boxShadow: "0 1.9px 7px rgba(251,191,36,0.10)",
+              fontSize: "1.09rem",
             }}
-            onClick={() => fileInputRef.current && fileInputRef.current.click()}
+            onClick={() =>
+              fileInputRef.current && fileInputRef.current.click()
+            }
             aria-label="Upload contract text file"
           >
             Upload .txt File
           </button>
         </div>
-        {error &&
-          <div style={{
-            color: "#d7263d",
-            marginBottom: 14,
-            fontWeight: 500
-          }}>
+
+        {error && (
+          <div className="form-error-message" style={{marginBottom: 13}}>
             {error}
           </div>
-        }
-        <div style={{
+        )}
+
+        <div
+          style={{
             display: "flex",
             width: "100%",
             justifyContent: "space-between",
             gap: 18,
             marginTop: 5,
-            flexWrap: "wrap"
-          }}>
+            flexWrap: "wrap",
+          }}
+        >
           <button
             type="button"
             onClick={handleSkip}
-            className="btn"
+            className="btn actionable-large"
             style={{
-              background: "#eeeeec",
+              background: "#ececec",
               color: "#848a88",
-              border: "1.3px solid #cecece",
-              fontWeight: 500,
-              minWidth: 84
+              border: "1.7px solid #cecece",
+              fontWeight: 600,
+              minWidth: 104,
+              fontSize: "1.07em",
             }}
             aria-label="Skip contract to view cyber risk only"
           >
@@ -204,10 +221,11 @@ function ContractUpload({ onContinue, onSkip }) {
           </button>
           <button
             type="submit"
-            className="btn btn-large"
+            className="btn btn-large actionable-large"
             style={{
-              minWidth: 110,
-              marginLeft: "auto"
+              minWidth: 138,
+              marginLeft: "auto",
+              fontWeight: 700
             }}
             aria-label="Continue to results"
           >

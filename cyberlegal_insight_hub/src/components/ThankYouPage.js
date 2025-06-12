@@ -73,45 +73,64 @@ function ThankYouPage({ onRetake }) {
             }}
             aria-label="Subscribe for updates"
           >
+            <label
+              htmlFor="subscribe-email"
+              className="form-label"
+              style={{ alignSelf: "flex-start", fontWeight: 600, fontSize: "1.08em" }}
+            >
+              Email for updates
+            </label>
             <input
+              id="subscribe-email"
               type="email"
               placeholder="Your email address"
               value={email}
               aria-label="Email address"
+              className={subscribeError ? "error" : ""}
               style={{
-                border: "1.2px solid #e5e7eb",
-                borderRadius: 7,
-                fontSize: "1.06em",
-                padding: "10px 13px",
+                borderRadius: 17,
+                fontSize: "1.17em",
+                padding: "18px 20px",
                 width: "100%",
                 maxWidth: 240,
-                marginBottom: 4
+                marginBottom: 4,
+                border: subscribeError ? "2px solid var(--color-danger)" : "2px solid var(--color-border)",
+                boxShadow: subscribeError
+                  ? "0 0 0 5px #e8314713"
+                  : "0 2.5px 7px 0 rgba(37,99,235,0.09)",
+                background: "var(--color-card)",
+                color: "var(--text-primary)",
+                outline: "none"
               }}
               onChange={e => { setEmail(e.target.value); if (subscribeError) setSubscribeError(""); }}
               required
+              aria-invalid={!!subscribeError}
             />
             <button
               type="submit"
-              className="btn"
+              className="btn actionable-large"
               style={{
                 background: "var(--color-accent)",
                 color: "#222",
                 fontWeight: 600,
-                minWidth: 138
+                minWidth: 148,
+                fontSize: "1.1em",
               }}
             >
               Subscribe for Updates
             </button>
             {subscribeError &&
-              <div style={{ color: "#bb1d2c", marginTop: 7, fontSize: "0.99em" }}>
+              <div className="form-error-message" style={{marginTop: 7}}>
                 {subscribeError}
               </div>
             }
-            <div style={{
-              marginTop: 7,
-              color: "var(--secondary-text)",
-              fontSize: "0.95em"
-            }}>
+            <div
+              style={{
+                marginTop: 7,
+                color: "var(--text-secondary)",
+                fontSize: "0.98em",
+              }}
+            >
               No spam. Only rare updates about cyber/legal safety & product improvements.
             </div>
           </form>
