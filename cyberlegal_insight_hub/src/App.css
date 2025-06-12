@@ -1,0 +1,211 @@
+:root {
+  /* Brand palette */
+  --color-primary: #2563eb;    /* blue-600 */
+  --color-secondary: #f1f5f9;  /* slate-100 light grey */
+  --color-accent: #fbbf24;     /* yellow-400 */
+
+  /* Base theme colors */
+  --background: var(--color-secondary);
+  --surface: #fff;
+  --navbar-bg: #fff;
+  --navbar-border: #e5e7eb;
+  --primary-text: #18181b;    /* gray-900 */
+  --secondary-text: #475569;  /* slate-600 */
+  --disabled-text: #cbd5e1;   /* slate-300 */
+
+  /* Base typography and spacing */
+  --font-size-base: 1.07rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.9rem;
+  --font-size-title: 2.35rem;
+  --font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  --line-height: 1.6;
+
+  /* Spacing scale */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --radius: 6px;
+
+  /* Button */
+  --btn-bg: var(--color-primary);
+  --btn-bg-hover: #1747b7;
+  --btn-text: #fff;
+  --btn-radius: var(--radius);
+  --btn-padding: 10px 24px;
+
+  /* Card/Surface shadow */
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Accessible, clean base theme */
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--primary-text);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Layout wrapper */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--background);
+}
+
+/* Navigation bar */
+.navbar {
+  background: var(--navbar-bg);
+  border-bottom: 1px solid var(--navbar-border);
+  padding: var(--space-sm) 0;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  transition: background 0.2s;
+  display: flex;
+}
+
+.logo {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  letter-spacing: 0.02em;
+  color: var(--primary-text);
+}
+
+.logo-symbol {
+  color: var(--color-primary);
+  font-size: 1.6em;
+  font-weight: 800;
+}
+
+/* Layout constraint */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hero Section */
+.hero {
+  padding-top: calc(var(--space-xl) + var(--space-lg));
+  padding-bottom: var(--space-xl);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+/* Typography */
+.subtitle {
+  color: var(--color-accent);
+  font-weight: 500;
+  font-size: var(--font-size-lg);
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-xs);
+}
+
+.title {
+  font-size: var(--font-size-title);
+  font-weight: 700;
+  line-height: 1.17;
+  margin: 0 0 var(--space-sm) 0;
+  color: var(--primary-text);
+}
+
+.description {
+  font-size: var(--font-size-lg);
+  line-height: 1.5;
+  color: var(--secondary-text);
+  max-width: 560px;
+  margin: 0 auto var(--space-xs) auto;
+}
+
+.btn {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: var(--btn-radius);
+  padding: var(--btn-padding);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.16s, box-shadow 0.16s;
+  box-shadow: var(--shadow-md);
+  outline: none;
+  display: inline-block;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--btn-bg-hover);
+}
+
+.btn-large {
+  padding: 12px 32px;
+  font-size: var(--font-size-lg);
+}
+
+/* Focus styles for accessibility */
+.btn:focus-visible, .navbar a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Utility: disable text selection on logo for polish */
+.logo, .logo-symbol {
+  user-select: none;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-lg);
+  }
+  .title {
+    font-size: 1.7rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
+  .description {
+    font-size: 1rem;
+  }
+  .container {
+    padding: 0 var(--space-xs);
+  }
+}
+
+/* Remove default input/button styling where relevant */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* Add a visually hidden class for accessibility utilities */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
