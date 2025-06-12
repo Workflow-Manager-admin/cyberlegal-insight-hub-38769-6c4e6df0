@@ -1,6 +1,7 @@
 import React from 'react';
 
 function Footer() {
+  // Edit mode control/button/toggle has been removed as requested.
   return (
     <footer style={{
       background: 'var(--color-bg-surface)',
