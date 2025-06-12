@@ -1,64 +1,82 @@
+/* Import modern, attractive Google Fonts (Inter, Poppins, Montserrat as fallback) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Montserrat:wght@400;700&display=swap');
+
 :root {
-  /* Deep Graphite Harmonious Modern Palette */
-  --deep-graphite: #1E1E26;
-  --slate-grey: #3B3C48;
-  --neon-violet: #9B59FF;
-  --electric-magenta: #FF007A;
-  --matte-silver: #C4C5CA;
-  --muted-lilac: #A19BBD;
-  --blush-pink: #FFB4DA;
-  --night-purple: #2C1E3F;
+  /* Black-Grey-Blue Modern Palette */
+  --deep-black: #101119; /* Very deep black for backgrounds */
+  --charcoal-grey: #191c23;
+  --slate-grey: #232530;
+  --mid-grey: #353746;
+  --overlay-grey: #292b35;
+  --light-grey: #a5adc8;
+  --border-grey: #22232c;
 
-  /* Core mapping - for use in app elements */
-  --color-primary: var(--neon-violet);
-  --color-accent: var(--electric-magenta);
-  --color-surface: var(--slate-grey);
-  --color-surface-accent: var(--muted-lilac);
-  --color-overlay: var(--blush-pink);
-  --color-heading: var(--neon-violet);
-  --color-heading-contrast: var(--electric-magenta);
-  --color-bg-main: var(--deep-graphite);
-  --color-bg-gradient: linear-gradient(135deg, var(--deep-graphite) 60%, var(--night-purple) 100%);
-  --color-contrast: var(--night-purple);
-  --text-primary: var(--matte-silver);
-  --text-secondary: var(--muted-lilac);
-  --text-overlay: var(--night-purple); /* for high-accent overlays */
-  --border-light: var(--matte-silver);
-  --border-accent: var(--electric-magenta);
-  --shadow-main: 0 2px 32px 0 rgba(155,89,255,0.12), 0 1.5px 11px 0 rgba(255,0,122,0.08);
-  --shadow-card: 0 2px 15px 0 rgba(155,89,255,0.09), 0 1.5px 10px 0 rgba(44,30,63,0.13);
+  --blue-accent: #2563eb;          /* vivid blue for primary */
+  --blue-accent-light: #3b82f6;    /* lighter blue for hovers/focus */
+  --blue-accent-softer: #7dd3fc;   /* background accent/lightified */
+  --blue-active: #0ea5e9;
+  --sky-bg: linear-gradient(135deg, #101119 70%, #232535 100%);
+  --surface-black: #191c23;
+  --surface-grey: #232530;
 
-  /* Gradient overlays and modals */
-  --overlay-gradient: linear-gradient(122deg, var(--blush-pink) 5%, var(--matte-silver) 65%, var(--muted-lilac) 100%);
-  --modal-bg: linear-gradient(110deg, var(--matte-silver), var(--blush-pink) 70%);
-  --focus-outline: 2px solid var(--electric-magenta);
+  /* Primary app colors */
+  --color-primary: var(--blue-accent);
+  --color-primary-light: var(--blue-accent-light);
+  --color-accent: var(--blue-active);
+  --color-bg-main: var(--deep-black);
+  --color-bg-surface: var(--surface-black);
+  --color-bg-gradient: var(--sky-bg);
+  --color-card: var(--surface-grey);
+  --color-border: var(--border-grey);
+  --color-heading: var(--blue-accent-light);
+  --color-success: #00e18b;
+  --color-warning: #ffd936;
+  --color-danger: #e83147;
 
-  /* UI mapping for buttons, cards, tabs */
-  --btn-bg: var(--neon-violet);
-  --btn-bg-hover: var(--electric-magenta);
+  /* Text colors */
+  --text-primary: #e7ebf7;
+  --text-secondary: #a5adc8;
+  --text-heading: #fff;
+  --text-accent: var(--blue-accent);
+  --text-inverse: #101119;
+
+  /* UI shadow and border radius */
+  --shadow: 0 2px 28px 0 rgba(37,99,235,0.10), 0 1.5px 10px 0 rgba(16,17,25,0.15);
+  --shadow-card: 0 2px 14px 0 rgba(37,99,235,0.08), 0 1.5px 8px 0 rgba(16,17,25,0.13);
+  --radius: 14px;
+  --radius-lg: 22px;
+
+  /* Font settings */
+  --font-family: 'Inter', 'Poppins', 'Montserrat', 'Segoe UI', 'Arial', sans-serif;
+  --font-size-base: 1.09rem;
+  --font-size-md: 1.17rem;
+  --font-size-lg: 1.3rem;
+  --font-size-xl: 1.82rem;
+  --font-size-title: 2.21rem;
+  --font-weight-title: 800;
+  --line-height: 1.58;
+
+  /* Button styles */
+  --btn-bg: var(--color-primary);
+  --btn-bg-hover: var(--color-primary-light);
   --btn-text: #fff;
-  --btn-radius: 18px;
-  --btn-padding: 12px 28px;
-  --btn-shadow: 0 0 16px 3px rgba(155,89,255,0.25), 0 1.5px 8px 0 rgba(255,0,122,0.07);
+  --btn-radius: 21px;
+  --btn-padding: 12px 30px;
+  --btn-shadow: 0 0 15px 2px rgba(37,99,235,0.13), 0 1.5px 7px 0 rgba(16,17,25,0.09);
 
-  --card-bg: linear-gradient(112deg, rgba(59,60,72,0.98) 90%, rgba(161,155,189,0.045) 100%);
-  --card-border: 1.5px solid var(--muted-lilac);
+  /* Card styles */
+  --card-bg: linear-gradient(112deg, rgba(35,37,48,0.98) 85%, rgba(37,99,235,0.06) 100%);
+  --card-border: 1.5px solid var(--color-border);
 
-  --tab-bg: var(--deep-graphite);
-  --tab-bg-active: var(--neon-violet);
+  /* Tab styles */
+  --tab-bg: var(--deep-black);
+  --tab-bg-active: var(--color-primary);
   --tab-text: var(--text-secondary);
   --tab-text-active: #fff;
-  --tab-outline: 1.2px solid var(--matte-silver);
+  --tab-outline: 1.3px solid var(--charcoal-grey);
 
-  /* Miscellaneous */
-  --radius: 13px;
-  --font-family: 'Inter', 'Roboto', 'Orbitron', 'Share Tech Mono', 'Helvetica', 'Arial', sans-serif;
-  --font-size-base: 1.06rem;
-  --font-size-lg: 1.22rem;
-  --font-size-xl: 1.8rem;
-  --font-size-title: 2.23rem;
-  --line-height: 1.55;
-  --font-weight-title: 800;
+  /* Focus */
+  --focus-outline: 2.5px solid var(--blue-active);
 
   /* Spacing scale */
   --space-xs: 8px;

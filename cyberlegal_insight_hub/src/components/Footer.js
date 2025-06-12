@@ -1,19 +1,20 @@
 import React from 'react';
 
-// PUBLIC_INTERFACE
 function Footer() {
   return (
     <footer style={{
-      background: 'var(--navbar-bg)',
-      borderTop: '1px solid var(--navbar-border)',
-      padding: '16px 0',
+      background: 'var(--color-bg-surface)',
+      borderTop: '1.5px solid var(--color-border)',
+      padding: '18px 0',
       textAlign: 'center',
       marginTop: 'auto',
-      color: 'var(--secondary-text)',
-      fontSize: '1rem'
+      color: 'var(--text-secondary)',
+      fontSize: '1rem',
+      letterSpacing: '0.01em',
+      fontFamily: 'var(--font-family)'
     }}>
       <div className="container">
-        &copy; {new Date().getFullYear()} <span style={{ color: 'var(--color-primary)' }}>KAVIA AI</span> &mdash; CyberLegal Insight Hub.
+        &copy; {new Date().getFullYear()} <span style={{ color: 'var(--color-primary)', fontWeight: 600 }}>KAVIA AI</span> &mdash; CyberLegal Insight Hub.
       </div>
     </footer>
   );
