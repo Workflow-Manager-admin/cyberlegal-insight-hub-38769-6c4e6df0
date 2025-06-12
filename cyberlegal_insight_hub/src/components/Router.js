@@ -1,7 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-
 import React, { useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import WelcomePage from "./WelcomePage";
 import CyberQuiz from "./CyberQuiz";
 import ContractUpload from "./ContractUpload";
