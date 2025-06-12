@@ -4,6 +4,7 @@ import WelcomePage from "./WelcomePage";
 import CyberQuiz from "./CyberQuiz";
 import ContractUpload from "./ContractUpload";
 import ResultsDashboard from "./ResultsDashboard";
+import ThankYouPage from "./ThankYouPage";
 import { calculateCyberHygieneScore, calculateContractRiskScore, calculateOverallRisk } from "../logic/riskScoring";
 import { useNavigate, useNavigate as useNavUpload } from "react-router-dom";
 
@@ -77,20 +78,17 @@ function UnifiedFlowRouter() {
   // Step 4: Thank You
   if (step === 3) {
     return (
-      <section className="container hero" style={{ textAlign: "center" }}>
-        <div className="subtitle">Thank You</div>
-        <h1 className="title">Assessment Complete!</h1>
-        <div className="description">
-          We appreciate your time. Stay tuned for your personalized insights!
-        </div>
-        <button
-          className="btn btn-large"
-          onClick={() => setStep(0)}
-          style={{ marginTop: 26, minWidth: 120 }}
-        >
-          Retake Assessment
-        </button>
-      </section>
+      <ThankYouPage
+        onRetake={() => {
+          // Clear all states for fresh start
+          setStep(0);
+          setQuizAnswers([]);
+          setCyberScoreResult(null);
+          setContractText("");
+          setContractScoreResult(null);
+          setOverall(null);
+        }}
+      />
     );
   }
 
